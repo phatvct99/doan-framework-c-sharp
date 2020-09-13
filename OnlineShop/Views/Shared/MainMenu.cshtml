@@ -1,0 +1,42 @@
+﻿@model List<Model.EF.Menu>
+    <div class="menu">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="@item.Link" target="@item.Target">@item.Text</a>
+
+                </li>
+            }
+            <div class="clear"></div>
+        </ul>
+
+        <nav class="main-menu">
+
+            <ul class="l-inline ov">
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="/san-pham/suatangcan-1">Sữa tăng cân</a></li>
+                <li><a href="/san-pham/wheyprotein-2">Whey-Protein</a></li>
+                <li><a href="/san-pham/bcaa-4">BCAA</a></li>
+                <li><a href="/gioi-thieu">Giới thiệu</a></li>
+                <li><a href="/tin-tuc">Tin tức</a></li>
+                <li><a href="/lien-he">Liên hệ</a></li>
+
+            </ul>
+            <div class="clearfix"></div>
+        </nav>
+    </div>
+
+    <script>
+	$(document).ready(function($) {
+		$(window).scroll(function(){
+            if ($(this).scrollTop() > 150) {
+                $(".header_bottom").addClass('fixNav')
+			}else{
+                $(".header_bottom").removeClass('fixNav')
+			}}
+		)
+	})
+    </script>
+
+    

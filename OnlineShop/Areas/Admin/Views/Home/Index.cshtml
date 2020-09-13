@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+    Trang chủ
+}
+<script src="~/Content/Admin/vendor/chart.js/Chart.js"></script>
+@{
+    string[] arrayList = new string[12];
+    arrayList = (string[])ViewBag.dateX;
+    string[] dt = new string[12];
+    dt = (string[])ViewBag.data;
+    string name = "Doanh thu";
+}
+@* hiện biểu đồ*@
+<canvas id="myChart" width="60" height="30"></canvas>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["@arrayList[0]","@arrayList[1]","@arrayList[2]","@arrayList[3]","@arrayList[4]","@arrayList[5]","@arrayList[6]","@arrayList[7]","@arrayList[8]","@arrayList[9]","@arrayList[10]","@arrayList[11]"],
+            datasets: [{
+                label: '@name',
+                data: [@dt[0],@dt[1],@dt[2],@dt[3],@dt[4],@dt[5],@dt[6],@dt[7],@dt[8],@dt[9],@dt[10],@dt[11]],
+                backgroundColor: [
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 159, 64, 1)'
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <button class="taixuong"> Generate Report</button>
+        
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="col-auto">
+                                <center><i class="fas fa-calendar fa-2x text-gray-300"> Tháng</i></center>
+                                <center>@arrayList[0]</center>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="col-auto">
+                                <center><i class="fas fa-dollar-sign fa-2x text-gray-300"> Doanh thu</i></center>
+                                <center>@dt[0] VND</center>
+                            </div>
+                         
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Content Row -->
+    <!-- Content Row -->
+    <div class="row">
+        <!-------------------------------------------------------------------------------------------------------------------------------------------->
+        <!---1-->
+        <div class="col-lg-4 mb-4 ">
+            <a class="card bg-warning text-white shadow border-bottom-primary" href="@Url.Action("Index","Items")">
+                <div class="card-body ">
+                    <i class="fas fa-cube fa-2x text-gray-300"></i>
+                    <h6 style="font-weight: bold;">All Product</h6>
+                </div>
+            </a>
+        </div>
+        <!---2---->
+        <div class="col-lg-4 mb-4">
+            <a class="card bg-primary text-white shadow border-bottom-success" href="@Url.Action("Index","ItemTypes")">
+                <div class="card-body">
+                    <i class="fas fa-th-large fa-2x text-gray-300"></i>
+                    <h6 style="font-weight: bold;">New Product type</h6>
+                </div>
+            </a>
+        </div>
+        <!---3---->
+        <div class="col-lg-4 mb-4">
+            <a class="card bg-success text-white shadow border-bottom-danger" href="@Url.Action("Index","BAnners")">
+                <div class="card-body">
+                    <i class="fas fa-sticky-note fa-2x text-gray-300"></i>
+                    <h6 style="font-weight: bold;">Edit Banner</h6>
+                </div>
+            </a>
+        </div>
+        <!----4--->
+        <div class="col-lg-4 mb-4">
+            <a class="card bg-danger text-white shadow border-bottom-danger" href="@Url.Action("ListOrder","Admin")">
+                <div class="card-body">
+                    <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    <h6 style="font-weight: bold;">All Oders</h6>
+                </div>
+            </a>
+        </div>
+        <!----5--->
+        <div class="col-lg-4 mb-4">
+            <a class="card bg-info border-bottom-primary text-white shadow" href="buttons.html">
+                <div class="card-body">
+                    <i class="fas fa-building fa-2x text-gray-300"></i>
+                    <h6 style="font-weight: bold;">New Trademark</h6>
+                </div>
+            </a>
+        </div>
+        <!---6---->
+        <div class="col-lg-4 mb-4">
+            <a class="card bg-primary border-bottom-warning text-white shadow" href="buttons.html">
+                <div class="card-body">
+                    <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                    <h6 style="font-weight: bold;">New Cutom</h6>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+    <!-- Content Row -->
+    <!-- Content Row -->
+
+</div>
+<!-- /.container-fluid -->
+      </div>

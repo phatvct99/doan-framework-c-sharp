@@ -1,0 +1,128 @@
+﻿@*@model IEnumerable<OnlineShop.Areas.Admin.Models.OrderModel>*@
+@model Model.EF.Order
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+
+@section header{
+    Quản lí đơn hàng
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h2 class="text-center">Confirm</h2>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShipName)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShipMobile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShipAddress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShipEmail)
+                        </th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ShipName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.ShipMobile)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.ShipAddress)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.ShipEmail)
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Xác nhận đơn hàng
+                        </th>
+                        <th>
+                            <div class="as">
+                                @Html.EditorFor(model => model.Status)
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+
+                        </th>
+
+
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10d">
+                    <div class="checkbox">
+                        <h2 class=" phat123">    @Html.EditorFor(model => model.Status)    Xác nhận đơn hàng </h2>
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xác nhận" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+<p>
+    @Html.ActionLink("Sửa đơn hàng", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>
+

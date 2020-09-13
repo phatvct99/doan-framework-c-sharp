@@ -1,0 +1,105 @@
+﻿@model Model.EF.Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    var relatedProducts = (List<Model.EF.Product>)ViewBag.RelatedProducts;
+    ViewBag.Title = category.Name;
+
+}
+
+<div class="content">
+    
+    <div class="section group">
+        <div class="rightsidebar span_3_of_1">
+            @{ Html.RenderAction("ProductCategory", "Product");}
+        </div>
+        <div class="cont-desc span_1_of_2">
+            <div class="product-details">
+                <div class="grid images_3_of_2">
+                    <div id="container">
+                        <div id="products_example">
+                            <div id="products">
+                                <div class="slides_container">
+                                    <a href="#" target="_blank"><img src="~/@Model.Image" alt=" " /></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc span_3_of_2">
+                    <h2>@Model.Name </h2>
+                    <p>@Model.Description</p>
+                    <div class="price">
+                        <p>Giá: <span>@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ")</span></p>
+                    </div>
+                    <div class="share-desc">
+
+                        <div class="button"><span><a href="/them-gio-hang?productId=@Model.ID&quantity=1">Thêm vào giỏ</a></span></div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="product_desc">
+                <div id="horizontalTab">
+                    <ul class="resp-tabs-list">
+                        <li>Chi tiết</li>
+
+                        <div class="clear"></div>
+                    </ul>
+                    <div class="resp-tabs-container">
+                        <div class="product-desc">
+                            @Html.Raw(Model.Detail)
+                        </div>
+                        <img class="lazy" src="~/assets/client/images/anh1.jpg" alt="Whey Protein - sữa tăng cơ bắp khủng cho người tập Gymer" title="Whey Protein - sữa tăng cơ bắp khủng cho người tập Gymer" style="max-width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#horizontalTab').easyResponsiveTabs({
+                        type: 'default', //Types: default, vertical, accordion
+                        width: 'auto', //auto or any width like 600px
+                        fit: true   // 100% fit in a container
+                    });
+                });
+            </script>
+           
+            <div class="content_chitiet">
+                <div class="heading">
+                    <h3>Sản phẩm liên quan</h3>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <div class="section group">
+                @foreach (var item in relatedProducts)
+                {
+                    var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="@link"><img src="~/@item.Image" alt="" /></a>
+                        <h2>@item.Name</h2>
+
+                        <div class="price-details">
+                            <div class="price-number">
+                                <p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span></p>
+                            </div>
+                            <div class="add-cart">
+                                <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">ADD</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                }
+                <div class="clear"></div>
+                <!--Phân trang-->
+
+            </div>
+        </div>
+
+    </div>
+</div>

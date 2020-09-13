@@ -1,0 +1,29 @@
+﻿@model List<OnlineShop.Models.CartItem>
+
+    <div class="search_box">
+        <form action="/tim-kiem" method="get">
+            <input type="text" id="txtKeyword" name="keyword" placeholder="Gõ từ khoá"><input type="submit" value="">
+        </form>
+        <div class="cs-flex sugges hidden-top-bar">
+            <div class="label mr-10">Gợi ý: </div>
+            <div style="white-space: nowrap;overflow:hidden;width:calc(100% - 50px)">
+                <a href="/tim-kiem?keyword=bcaa" class=" mr-5">Bcaa,</a>
+                <a href="/tim-kiem?keyword=Sữa+Tăng+Cân" class=" mr-5">Sữa tăng cân,</a>
+                <a href="/tim-kiem?keyword=whey" class=" mr-5">Whey,</a>
+                <a href="/tim-kiem?keyword=vitamin" class=" mr-5">Vitamin,</a>
+                
+                .v.v.
+            </div>
+        </div>
+    </div>
+
+
+<div class="cart">
+
+    <p>
+        <span>Giỏ hàng:</span>
+            @Model.Count sản phẩm   <a href="/thanh-toan">Thanh Toán</a>
+         
+    </p>
+
+</div>
